@@ -1,0 +1,81 @@
+# Release Notes
+
+## Release
+
+- Version Name: 1.0
+- Version Code: 100
+- Release Date: TBD
+
+---
+
+## Overview
+
+This is the first public release of SameView, an offline photo re-shoot and comparison app. SameView helps users line up a new photo with an existing reference photo, capture the recreation, and compare the two images side by side or as a slider. All processing happens on the device; there is no account, no backend, and no network access of any kind.
+
+---
+
+## Main Features
+
+### Capture
+
+- Live camera preview built on CameraX, using the device's back camera.
+- Optional grid overlay (Off, Rule of Thirds, Quarters) to assist framing; the grid is a preview aid only and is never written into captured images.
+- A reference image can be overlaid on the live preview with adjustable opacity, drag positioning, and pinch-to-scale, so the new shot can be aligned to the old one before capture.
+- Up to five reference markers ("alignment points") can be placed on the reference image, with drag repositioning and a magnifying loupe for precise placement.
+- A live coverage warning appears if too little of the overlay is visible in the frame.
+- Captured photos are saved to the device gallery (`Pictures/SameView`) via MediaStore.
+
+### Photo Comparison
+
+- Every successful capture with an active reference creates a "session" containing the new photo, the reference photo, and associated metadata.
+- A dedicated Compare screen presents the two images as an interactive slider, with a fullscreen viewing mode.
+- Session titles, descriptions, a reference date, and a free-text location can be added or edited afterwards in a session editor.
+- Sessions can be marked as favorites and organized in a library screen with filtering (all / favorites) and sorting (newest / oldest first) options.
+- The library grid adapts its column count to the device's screen size.
+
+### Sharing and Export
+
+- A finished comparison can be exported as a still image (side-by-side or slider style, with an optional SameView watermark) and shared through the Android Share Sheet.
+- A finished comparison can also be exported as a short video, in a choice of comparison styles (sliding transition, before/after crossfade, or a hard-cut "flash" style), with an optional branded end card.
+- Both exported images and videos are shared only after an explicit tap by the user; nothing is shared automatically.
+
+### GPS Recreation Guidance
+
+- An optional, off-by-default feature that reads the location stored in the reference photo (if any) and guides the user back to that spot using distance and, optionally, a live directional arrow.
+- Location access is requested only the first time this feature is turned on in Settings, and only while the camera screen is open and the feature is active.
+- When enabled, the location of the new capture is recorded alongside the session so future comparisons can reference the same spot.
+
+### Backup
+
+- Any session, or a multi-selection of sessions, can be exported as a single ZIP file to a location chosen by the user, using the Android system file picker.
+- Backups are a one-way export; there is no import or restore function.
+
+### Settings
+
+- Grid type, keep-screen-awake, overlay reset behavior, auto-open-compare behavior, and the GPS Recreation Guidance / live direction arrow toggles are available in a dedicated Settings screen.
+- An optional "strip metadata from originals" toggle removes EXIF, GPS, and camera/device metadata from the stored original image files for greater privacy; this does not affect the photo already saved to the device gallery.
+
+### First-Run Guidance
+
+- A short walkthrough introduces the core workflow on first launch, and can be replayed at any time from within the app.
+- Contextual guide tips highlight individual features as they become relevant.
+
+---
+
+## Privacy
+
+- SameView has no Internet permission and makes no network requests of any kind. There is no analytics, crash reporting, advertising, or cloud service integration.
+- All photos, session data, and settings are stored locally on the device; nothing is uploaded anywhere.
+- Location access is optional, off by default, and used only for the Recreation Guidance feature described above.
+- Session data is excluded from Android's automatic backup and device-transfer mechanisms, so photos and location data are not carried along by the OS's own backup system.
+- The only ways data leaves the app are actions the user takes deliberately: sharing an exported image or video through the Share Sheet, or exporting a backup ZIP to a destination the user selects.
+
+---
+
+## Known Limitations
+
+- Backup export is one-way: there is no in-app function to import or restore a previously exported ZIP file.
+- Deleting a session removes the internal comparison data but does not delete the corresponding photo (or its location data) from the device gallery; that photo must be removed separately if desired.
+- For a small number of reference image formats that cannot be re-encoded on the device (certain older AVIF files, or files with an unrecognized format), the "strip metadata from originals" feature cannot remove existing metadata from the stored original; the app discloses this per session when it occurs.
+- The comparison slider and overlay positioning rely on touch gestures (drag and pinch) without an alternative input path for screen-reader users.
+- Very large reference images can increase memory use during session creation on lower-memory devices.

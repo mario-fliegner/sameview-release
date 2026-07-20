@@ -1,0 +1,110 @@
+Google Play Release Checklist
+=============================
+
+Release Information
+-------------------
+
+[ ] Version Name finalized
+[ ] Version Code finalized
+[ ] Release Date finalized
+[ ] Release branch merged
+[ ] Git tag created
+
+--------------------------------------------------
+
+Application
+-----------
+
+[ ] Release build created (.aab)
+[ ] Release signing verified
+[ ] Release build tested
+[ ] Version number verified inside the app
+
+--------------------------------------------------
+
+Store Listing
+-------------
+
+[ ] App title
+[ ] Short description (EN)
+[ ] Short description (DE)
+[ ] Full description (EN)
+[ ] Full description (DE)
+[ ] App category
+[ ] Contact email
+[ ] Website URL
+
+--------------------------------------------------
+
+Graphics
+--------
+
+[ ] App icon
+[ ] Feature Graphic
+[ ] Phone screenshots (EN)
+[ ] Phone screenshots (DE)
+
+--------------------------------------------------
+
+Legal
+-----
+
+[ ] Privacy Policy URL (EN)
+[ ] Privacy Policy URL (DE)
+[ ] Imprint URL (EN)
+[ ] Imprint URL (DE)
+
+--------------------------------------------------
+
+Play Console
+------------
+
+[ ] App Access completed
+[ ] Data Safety completed
+[ ] Content Rating completed
+[ ] Ads declaration completed
+[ ] Target Audience completed
+[ ] Government Apps declaration reviewed (if applicable)
+[ ] News Apps declaration reviewed (if applicable)
+
+--------------------------------------------------
+
+Release Repository
+------------------
+
+[ ] AppAccess.txt reviewed
+[ ] DataSafety.txt reviewed
+[ ] Technical_DataSafety_Audit.md reviewed
+[ ] ReleaseNotes_EN.txt reviewed
+[ ] ReleaseNotes_DE.txt reviewed
+
+--------------------------------------------------
+
+Final Review
+------------
+
+[ ] Privacy Policy URLs reachable
+[ ] Imprint URLs reachable
+[ ] Website reachable
+[ ] Screenshots match current release
+[ ] Store text matches current app version
+
+--------------------------------------------------
+
+Publishing
+----------
+
+[ ] App Bundle uploaded
+[ ] Google Play warnings reviewed
+[ ] Release Notes entered into Play Console
+[ ] Production rollout configured
+[ ] Publish to Production
+
+--------------------------------------------------
+
+After Release
+-------------
+
+[ ] Store page verified
+[ ] Play Store installation tested
+[ ] Version archived in release repository

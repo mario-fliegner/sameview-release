@@ -1,0 +1,147 @@
+Google Play Data Safety
+========================
+
+Last updated
+2026-07
+
+==================================================
+APP OVERVIEW
+==================================================
+
+SameView is a fully offline Android application.
+
+The app:
+- does not require a user account
+- has no backend or cloud synchronization
+- does not request the INTERNET permission
+- contains no analytics SDKs
+- contains no advertising SDKs
+- contains no crash reporting SDKs
+- stores all user data locally on the user's device
+
+==================================================
+DATA COLLECTION
+==================================================
+
+Photos
+- Purpose: Core app functionality (reference photos, captured photos, comparisons)
+- Collected: Yes
+- Shared: No
+- Required: Yes
+
+Videos
+- Purpose: User-initiated comparison video export
+- Collected: Yes
+- Shared: No
+- Required: No (optional feature)
+
+Location
+- Purpose: Optional GPS recreation guidance and location metadata
+- Collected: Yes
+- Shared: No
+- Required: No
+- Notes: Disabled by default and only requested if the user enables the feature.
+
+User-generated content
+- Purpose: Titles, descriptions and favorites created by the user
+- Collected: Yes
+- Shared: No
+- Required: No
+
+Files and documents
+- Purpose: Manual ZIP backup export selected by the user
+- Collected: Yes
+- Shared: No
+- Required: No
+
+==================================================
+DATA NOT COLLECTED
+==================================================
+
+- Personal information
+- Email addresses
+- User IDs
+- Contacts
+- Messages
+- Audio recordings
+- Financial information
+- Health information
+- Device identifiers
+- Crash logs
+- Analytics
+- Advertising identifiers
+- Browsing history
+
+==================================================
+DATA SHARING
+==================================================
+
+SameView does not transmit user data to developer servers or third parties.
+
+User data only leaves the device when the user explicitly initiates an export or uses the Android Share Sheet.
+
+==================================================
+DATA SECURITY
+==================================================
+
+- No network communication
+- No INTERNET permission
+- All user data remains on the device
+- User sessions are excluded from Android Auto Backup and device transfer
+- No automatic cloud synchronization
+
+==================================================
+PERMISSIONS
+==================================================
+
+Required
+- CAMERA
+
+Optional
+- ACCESS_FINE_LOCATION
+- ACCESS_COARSE_LOCATION
+- ACCESS_MEDIA_LOCATION
+
+==================================================
+THIRD-PARTY SDKS
+==================================================
+
+No third-party tracking or monetization SDKs are included.
+
+Libraries used consist primarily of AndroidX / Jetpack, CameraX, Media3, Coil, Hilt/Dagger, ExifInterface and DataStore.
+
+Not included:
+- Firebase
+- Google Analytics
+- Crashlytics
+- Advertising SDKs
+- Networking libraries
+
+==================================================
+GOOGLE PLAY DECLARATION SUMMARY
+==================================================
+
+Collected
+- Photos
+- Videos
+- Location
+- User-generated content
+- Files and documents (manual backup export)
+
+Shared
+- None
+
+Encryption in transit
+- Not applicable (no network transmission)
+
+Data deletion
+- Users can delete individual sessions inside the app.
+- Uninstalling the app removes all locally stored app data.
+
+==================================================
+NOTES
+==================================================
+
+This document is based on the technical Google Play Data Safety audit performed against the SameView source code (July 2026).
+
+It serves as the reference document for completing the Google Play Console Data Safety questionnaire.

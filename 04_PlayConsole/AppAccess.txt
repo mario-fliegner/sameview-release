@@ -1,0 +1,7 @@
+App Access
+
+No login or user account is required.
+
+SameView is fully accessible without creating an account. All app features can be tested immediately after installation.
+
+No test account or special credentials are required.
