@@ -1,0 +1,110 @@
+SameView – Google Play ASO Keyword Research (EN)
+
+Status: July 2026
+
+========================================
+PRIMARY KEYWORDS
+========================================
+
+- reference photo
+- recreate photo
+- recreate old photo
+- same perspective
+- compare photos
+- photo comparison
+- before and after photo
+- before and after
+- camera overlay
+- overlay camera
+
+========================================
+SECONDARY KEYWORDS
+========================================
+
+- photo overlay
+- transparent overlay
+- alignment markers
+- reference image
+- photo slider
+- GPS guidance
+- original location
+- share photo
+- share video
+- backup
+- local storage
+
+========================================
+USE CASE KEYWORDS
+========================================
+
+- family photos
+- favorite places
+- travel
+- nature
+- architecture
+- landmarks
+- memories
+- changing seasons
+- then and now
+
+========================================
+LOW PRIORITY
+========================================
+
+- camera
+- photo
+- picture
+- gallery
+- image
+
+========================================
+KEYWORDS ALREADY COVERED
+========================================
+
+✓ reference photo
+✓ same perspective
+✓ comparison
+✓ slider
+✓ GPS guidance
+✓ location
+✓ photo
+✓ video
+✓ backup
+✓ sharing
+
+========================================
+KEYWORDS TO AVOID
+========================================
+
+Not relevant for SameView:
+
+- photo editor
+- AI photo
+- selfie
+- beauty
+- filters
+- collage
+- camera effects
+- image editing
+- timelapse
+- photo enhancer
+
+========================================
+ASO NOTES
+========================================
+
+Primary positioning:
+
+- reference photo
+- recreate photo
+- same perspective
+- before and after
+- compare photos
+- camera overlay
+
+Avoid positioning as:
+
+- photo editor
+- AI camera
+- beauty app
+- social media app

@@ -1,0 +1,24 @@
+Choose a reference photo and capture the same scene from the same perspective again.
+
+SameView helps you recreate the original shot as accurately as possible. Your reference photo is displayed as a transparent overlay on the camera preview, making it easier to align your new photo with the original. Once you've taken the new shot, you can compare both moments and share them as a photo or video.
+
+Whether it's your favorite places, your travels, nature, architecture, or family photos, SameView lets you capture how things change over time in a unique way.
+
+
+Features
+
+• Adjustable reference photo overlay with alignment markers
+• Interactive comparison of both photos with a slider
+• Create photos and videos to share
+• Keep your reference photos and comparisons organized
+• Optional GPS guidance back to the original photo location
+• Save a title, description, and location for each comparison
+• Export and import backups of your comparisons
+
+
+No sign-up. No cloud.
+
+SameView stores your photos and data exclusively on your device. You decide what you keep, what you share, and when.
+
+
+SameView – One view. Two moments.

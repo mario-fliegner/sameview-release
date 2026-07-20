@@ -1,0 +1,117 @@
+SameView – Google Play ASO Keyword Research (DE)
+
+Stand: 2026-07
+
+========================================
+PRIMARY KEYWORDS
+========================================
+
+Diese Begriffe beschreiben den Hauptnutzen der App und sollten möglichst natürlich in den Store-Texten vorkommen.
+
+- Referenzfoto
+- Foto nachstellen
+- Gleiche Perspektive
+- Perspektive erneut fotografieren
+- Fotos vergleichen
+- Bildvergleich
+- Vorher-Nachher-Foto
+- Vorher-Nachher-Vergleich
+- Erinnerungen festhalten
+- Veränderungen festhalten
+
+========================================
+SECONDARY KEYWORDS
+========================================
+
+- Kamera-Overlay
+- Foto-Overlay
+- Transparente Überlagerung
+- Referenzbild
+- Bildüberlagerung
+- Ausrichtung
+- Vergleichsbild
+- GPS-Führung
+- Standort speichern
+- Standort wiederfinden
+- Foto teilen
+- Vergleich teilen
+- Vergleichsvideo
+- Slider
+- Backup
+- Lokale Speicherung
+
+========================================
+USE CASE KEYWORDS
+========================================
+
+- Familienfotos
+- Lieblingsorte
+- Reisen
+- Natur
+- Architektur
+- Sehenswürdigkeiten
+- Jahreszeiten
+- Erinnerungen
+- Damals und heute
+
+========================================
+LOW PRIORITY
+========================================
+
+- Kamera
+- Fotos
+- Galerie
+- Bild
+- Aufnahme
+
+========================================
+KEYWORDS ALREADY COVERED
+========================================
+
+✓ Referenzfoto
+✓ Perspektive
+✓ Vergleich
+✓ Slider
+✓ GPS
+✓ Standort
+✓ Bild
+✓ Video
+✓ Backup
+✓ Teilen
+
+========================================
+KEYWORDS TO AVOID
+========================================
+
+Nicht passend zur App:
+
+- Bildbearbeitung
+- Filter
+- AI
+- KI
+- Selfie
+- Beauty
+- Collage
+- Fotobearbeitung
+- Zeitraffer
+- Kamera-App
+- Fotoeditor
+
+========================================
+ASO NOTES
+========================================
+
+Fokus auf:
+
+- Referenzfoto
+- Foto nachstellen
+- Gleiche Perspektive
+- Fotos vergleichen
+- Vorher-Nachher
+
+Vermeiden:
+
+- KI
+- Bildbearbeitung
+- Filter
+- Social Media
