@@ -102,6 +102,15 @@ Optional
 - ACCESS_COARSE_LOCATION
 - ACCESS_MEDIA_LOCATION
 
+Technical note
+- The final release manifest contains the transitive permission ACCESS_NETWORK_STATE from AndroidX Media3.
+  SameView does not use any network state APIs, does not declare the INTERNET permission,
+  and performs no network communication.
+- android.permission.DUMP is not requested by SameView. It appears only as the
+  android:permission protection attribute of the AndroidX ProfileInstallReceiver and
+  grants no capability to the app.
+
+
 ==================================================
 THIRD-PARTY SDKS
 ==================================================
