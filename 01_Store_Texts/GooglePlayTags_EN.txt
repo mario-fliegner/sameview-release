@@ -1,0 +1,103 @@
+SameView – Google Play Category & Tags Recommendation (EN)
+
+Research date: 2026-07-24
+
+==================================================
+IMPORTANT NOTE
+==================================================
+
+Only tags that are officially selectable in the Google Play Console
+("Store presence > Store listing > Categorization > Manage tags") may be
+used for this app. No custom, invented, or freeform keywords are permitted
+here (freeform ASO keywords are tracked separately in Keywords_Research_EN.txt
+and are NOT the same thing as Play Console tags).
+
+Google does not publish a single canonical public list of all available
+tags outside the Play Console UI itself. The tag names below were
+cross-checked against multiple third-party ASO sources that document the
+current Play Console tag picker (see SOURCES section). Before final
+submission, re-verify tag availability live inside Play Console, since
+Google can add, rename, or retire tags over time.
+
+==================================================
+RECOMMENDED CATEGORY
+==================================================
+
+Photography
+
+Justification:
+SameView's core function is capturing a new photo through a live camera
+preview with a reference-photo overlay, and comparing the result against
+that reference. This is a camera/photo-capture-centric app, not a general
+utility, video, or lifestyle app. "Photography" is one of Google Play's
+official app categories and is the closest match to this core functionality.
+Source: FullDescription_EN.txt ("Choose a reference photo and capture the
+same scene... reference photo overlay on the camera preview...").
+
+==================================================
+RECOMMENDED TAGS (max. 3 of 5 available slots used)
+==================================================
+
+1. Camera
+   Justification: The app's primary interaction is a live camera screen
+   with a reference-photo overlay used to recapture a scene. This is
+   confirmed as an officially available Play Console tag.
+   Source: FullDescription_EN.txt, feature list ("Adjustable reference
+   photo overlay with alignment markers").
+
+2. Photography
+   Justification: Matches the recommended primary category and the app's
+   overall positioning around capturing, comparing, and sharing photos.
+   Confirmed as an officially available Play Console tag.
+   Source: FullDescription_EN.txt (overall app description).
+
+3. Travel
+   Justification: One of the app's explicitly documented use cases is
+   revisiting favorite places and travel destinations to recreate a
+   photo from the same spot (supported by the optional GPS "recreation
+   guidance" feature). Confirmed as an officially available Play Console
+   tag.
+   Source: FullDescription_EN.txt ("Whether it's your favorite places,
+   your travels, nature, architecture, or family photos..."); optional
+   GPS guidance documented in Technical_DataSafety_Audit.md.
+
+==================================================
+TAGS CONSIDERED AND EXPLICITLY REJECTED
+==================================================
+
+- "Photo editor"
+  Rejected because the app explicitly does NOT position itself as a photo
+  editor. This is a documented ASO decision, not a new judgment made here.
+  Source: Keywords_Research_EN.txt, "KEYWORDS TO AVOID" / "Avoid
+  positioning as: photo editor".
+
+- "Video editing"
+  Rejected because video export in SameView is a single fixed comparison
+  export (no manual editing capability), so the tag would not be
+  "obviously relevant" per Google's own tag guidance. Source: Play
+  Console Help (see SOURCES) and FullDescription_EN.txt ("Create photos
+  and videos to share" — export only, no editing tools described).
+
+==================================================
+SOURCES (external research, Google Play tag/category mechanics)
+==================================================
+
+- Choose a category and tags for your app or game – Play Console Help:
+  https://support.google.com/googleplay/android-developer/answer/9859673
+- Complete List of Available Google Play Tags – AppTweak:
+  https://www.apptweak.com/en/aso-blog/complete-list-of-available-google-play-store-tags
+- Google Play Store Tags: What & How to Use Them – AppTweak:
+  https://www.apptweak.com/en/aso-blog/google-play-store-tags-what-how-to-use-them
+- Play Store App Tags: How to Choose Them – Sonar Blog:
+  https://trysonar.app/blog/play-store-app-tags
+
+==================================================
+STATUS
+==================================================
+
+This document is a recommendation based on documented app functionality
+(01_Store_Texts/FullDescription_EN.txt, 07_Review_Assets/Technical_DataSafety_Audit.md)
+and external research into currently available Google Play Console tags.
+It has not yet been confirmed against the live Play Console tag picker.
+This file is intended as the source of truth for category/tag decisions
+in future store updates — update it here first if the choice changes.

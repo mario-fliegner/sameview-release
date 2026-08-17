@@ -2,6 +2,8 @@ SameView – Google Play ASO Keyword Research (EN)
 
 Status: July 2026
 
+Unused tag slots are intentional. Additional tags should only be added if future versions introduce features that clearly justify them.
+
 ========================================
 PRIMARY KEYWORDS
 ========================================
