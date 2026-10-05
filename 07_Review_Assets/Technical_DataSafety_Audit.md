@@ -6,6 +6,9 @@
 **Auditor:** Claude Code (static repository analysis)
 **Scope:** Full-repository static analysis — manifest, Gradle/version catalog, and Kotlin sources — performed to support the Google Play Data Safety declaration for the first public release.
 
+> **Status (2026-10-02): superseded in part**
+> The body of this document records the v1.0 state as audited on 2026-07-20 and is kept unchanged as a record. Its findings that `android.permission.INTERNET` is not declared, that no networking library is present, and that the app is "fully offline", as well as its Data Safety mapping and final recommendation, no longer describe the current app. See [Addendum 2026-10-02](#addendum-2026-10-02-optional-deinwackelbild-order-flow) at the end of this document.
+
 > **Purpose of this document**
 > This is the authoritative technical reference behind SameView's Google Play Data Safety declaration. It exists so that future submissions, app updates, and Play review questions can be answered by pointing to concrete, verified evidence in the codebase rather than re-deriving the analysis from scratch. It is not a copy of the Play Console questionnaire — it is the reasoning and evidence that justifies each answer chosen there.
 
@@ -354,3 +357,90 @@ Based on the verified technical evidence in this audit, the Google Play Data Saf
 - **Privacy policy URL** → `https://sameview.app/en/privacy`, pending a final live-reachability check before submission.
 
 These answers are technically supported by direct evidence in the codebase: the absence of `android.permission.INTERNET` in the manifest, the absence of any data-transmitting third-party SDK in the dependency graph, the app-private storage location of all user content (`context.filesDir/sessions/...`), the explicit backup/cloud/device-transfer exclusions for that storage, the opt-in and default-off state of the location feature, and the fully manual, user-initiated nature of every mechanism (Share Sheet, ZIP export) that can move data outside the app sandbox. No aspect of this declaration depends on a promise about future behavior — every claim here traces to a specific, currently-verified file or code path in the audited repository.
+
+---
+
+## Addendum 2026-10-02: Optional DeinWackelbild Order Flow
+
+**Addendum date:** 2026-10-02
+**Author:** Claude Code
+**Scope:** Delta only. This addendum records what changed for the Data Safety declaration after the app gained the optional DeinWackelbild order. It is **not** a full re-audit: it is based on the established product facts for this feature, plus a check of `app/src/main/AndroidManifest.xml`, `app/build.gradle.kts`, and `gradle/libs.versions.toml`. The Kotlin sources were not re-inspected. Everything in the body above that is not listed here is left as audited on 2026-07-20.
+
+### Superseded statements
+
+| Statement in the body | Current state |
+|---|---|
+| `android.permission.INTERNET` is not declared (Executive Summary, Overall Architecture, Security & Privacy, Final Recommendation) | `INTERNET` is declared, for the optional DeinWackelbild order. |
+| "Fully offline" application | Normal use remains local/offline. The optional order transmits data after an explicit user action. |
+| No networking library in the dependency graph; OkHttp explicitly absent | OkHttp and AndroidX Browser are dependencies, used for the optional order. |
+| The only data movements across the app boundary are the Share Sheet and the SAF ZIP export | A third one exists: the optional DeinWackelbild order, performed by the app itself. |
+| Data Safety mapping: "Collected: Yes" for on-device data | Replaced by the revised mapping below. |
+| Encryption in transit: not applicable | Yes (HTTPS). |
+
+### Permissions
+
+| Permission | Required | Purpose | Optional | Notes |
+|---|---|---|---|---|
+| `android.permission.INTERNET` | No | Transfer for the optional DeinWackelbild order | Yes (feature is optional) | Declared in `AndroidManifest.xml`; normal permission, no runtime prompt |
+
+`ACCESS_NETWORK_STATE` is present in the final release manifest transitively through AndroidX Media3. SameView-owned code does not use it, and it does not itself permit data transmission.
+
+### Third-Party Libraries
+
+| Library | Purpose | Sends Data | Notes |
+|---|---|---|---|
+| OkHttp (`okhttp`) | HTTPS transfer to DeinWackelbild | Yes, only in the optional order | No other use established |
+| AndroidX Browser (`browser`) | Opens the external checkout/configurator in a Chrome Custom Tab | No (the browser performs the navigation) | — |
+
+No analytics, telemetry, tracking, advertising, or crash-reporting SDK is introduced.
+
+### Data Flow: Optional DeinWackelbild order
+
+- **Purpose:** Optional order of a physical lenticular print (Wackelbild).
+- **Trigger:** Explicit user action only. Immediately before the transfer, the app discloses that the two images go to DeinWackelbild.de and that ordering is completed there. No automatic upload, no background upload.
+- **Data accessed:** Exactly two prepared JPEGs (reference + capture). They are derived/prepared copies, not the stored originals, and contain no EXIF/GPS metadata. If the date option is enabled, the date text is rendered into the image pixels. Technical handoff values include a partner identifier, format, orientation, and direction. No SameView session ID and no external reference is sent.
+- **Storage location:** N/A on the SameView side — SameView has no server and does not receive the transferred images back.
+- **Leaves device?** Yes, over HTTPS, to O.Schulze / M.Monka GbR (DeinWackelbild), Wolfener Str. 32-34, 12681 Berlin, Germany.
+- **After the transfer:** The checkout/configurator opens externally in a Chrome Custom Tab/browser. The print order is completed with DeinWackelbild under its own terms and is separate from the SameView purchase on Google Play.
+- **Retention at the recipient:** If no order is completed, DeinWackelbild retains the transferred images for 24 hours and then deletes them. Retention for completed orders is not established here.
+- **Commercial relationship:** SameView receives a 10% commission on orders attributable to this handoff.
+- **Play category:** Photos and videos → Photos.
+- **Confidence:** Based on established product facts, not on source inspection in this addendum.
+
+The partner identifier value is a secret and must never be recorded in this repository.
+
+### Revised Google Play Data Safety Mapping
+
+Google's Data safety guidance defines "collect" as transmitting data from the app off a user's device; data that is only processed locally on the device does not need to be disclosed. This resolves [Potential Review Question 1](#1-is-on-device-only-locationphotos-access-still-collected): on-device-only data is not declared. This also matches the v1.0 submission record (`05_Releases/2026-07-24_PlayStoreSubmission.docx`), in which no data types were selected.
+
+| Play Category | Collected | Shared | Purpose | Optional | Basis |
+|---|---|---|---|---|---|
+| Photos and videos → Photos | Yes | No | App functionality | Optional | Two prepared JPEGs transmitted in the optional order; not processed ephemerally |
+| Photos and videos → Videos | No | — | — | — | Processed on device only |
+| Location (Approximate / Precise) | No | — | — | — | Processed on device only; not part of the transfer |
+| App activity → Other user-generated content | No | — | — | — | Processed on device only |
+| Files and docs | No | — | — | — | Processed on device only |
+| All other categories | No | — | — | — | Unchanged |
+
+**Shared: No** for Photos rests on the Google Play exception for a transfer to a third party "based on a specific user-initiated action, where the user reasonably expects the data to be shared". The "service provider" exception is not relied on.
+
+### Revised Final Recommendation
+
+- **Does your app collect or share any of the required user data types?** → **Yes**.
+- **Photos and videos → Photos** → Collected: **Yes** · Shared: **No** · Purpose: **App functionality** · **Optional** · not processed ephemerally.
+- **All other categories** → **Not collected** (on-device only, or not accessed).
+- **Data encrypted in transit** → **Yes** (HTTPS).
+- **Data deletion** → to be answered deliberately in the live form. The 24-hour deletion by DeinWackelbild covers transfers without a completed order only and is not used here as the basis for a deletion answer.
+- **Privacy policy URL** → unchanged; the live page must describe the optional order.
+
+The repository reference for these answers is `04_PlayConsole/DataSafety.txt`.
+
+### Open Questions
+
+- **Commission and the sharing exception.** The official guidance consulted does not address a commercial relationship in connection with the user-initiated-transfer exception. To be checked when the live Play Console form is completed. No conclusion is drawn here.
+- **Deletion question.** Retention for completed orders is not established.
+- **External checkout.** The guidance consulted addresses webviews, not Chrome Custom Tabs.
+- **Live form.** The current live answers have not been inspected; this addendum changes nothing in the Play Console.
+- **Outside Data Safety, not decided here:** SameView's role under GDPR for the transfer, the legal basis for the transfer, and what order or attribution information SameView receives in connection with the commission.
+
+Google sources consulted on 2026-10-02: Play Console Help "Provide information for Google Play's Data safety section" (answer/10787469) and the Play "User Data" policy (answer/10144311).

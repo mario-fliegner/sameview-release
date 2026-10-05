@@ -2,57 +2,81 @@ Google Play Data Safety
 ========================
 
 Last updated
-2026-07
+2026-10
 
 ==================================================
 APP OVERVIEW
 ==================================================
 
-SameView is a fully offline Android application.
+In normal use, SameView works locally and offline on the user's device.
 
 The app:
 - does not require a user account
 - has no backend or cloud synchronization
-- does not request the INTERNET permission
 - contains no analytics SDKs
 - contains no advertising SDKs
 - contains no crash reporting SDKs
-- stores all user data locally on the user's device
+- stores user data locally on the user's device
+- declares the INTERNET permission solely for the optional DeinWackelbild order
+
+The only case in which the app itself transmits user data off the device is the
+optional DeinWackelbild order, and only after the user explicitly starts it
+(see OPTIONAL DEINWACKELBILD ORDER).
+
+==================================================
+DEFINITION USED IN THIS DOCUMENT
+==================================================
+
+This document follows the Google Play Data safety definitions:
+
+- "Collect" means transmitting data from the app off a user's device.
+- User data that is only processed locally on the user's device and not sent
+  off device does not need to be disclosed.
+
+Earlier revisions of this document (2026-07) listed on-device data as
+"Collected: Yes". That did not match the Google definition and did not match
+the v1.0 submission record (05_Releases/2026-07-24_PlayStoreSubmission.docx:
+no data types selected). On-device data is now listed separately below.
 
 ==================================================
 DATA COLLECTION
 ==================================================
 
 Photos
-- Purpose: Core app functionality (reference photos, captured photos, comparisons)
+- Purpose: App functionality (optional DeinWackelbild print order)
 - Collected: Yes
-- Shared: No
-- Required: Yes
+- Shared: No (see DATA SHARING)
+- Required: No (optional feature, starts only after an explicit user action)
+- Processed ephemerally: No
+- Notes: Two prepared JPEG copies (reference + capture) are transmitted to
+  DeinWackelbild when the user explicitly starts the order. The stored
+  originals are not transmitted.
+
+==================================================
+DATA PROCESSED ON DEVICE ONLY (NOT DECLARED)
+==================================================
+
+The following data is accessed and processed locally only. The app does not
+transmit it off the device, so it is not "collected" under the Google
+definition and is not declared in the Data safety form.
+
+Photos (stored originals)
+- Purpose: Core app functionality (reference photos, captured photos, comparisons)
 
 Videos
 - Purpose: User-initiated comparison video export
-- Collected: Yes
-- Shared: No
-- Required: No (optional feature)
 
 Location
 - Purpose: Optional GPS recreation guidance and location metadata
-- Collected: Yes
-- Shared: No
-- Required: No
 - Notes: Disabled by default and only requested if the user enables the feature.
+  Not part of the DeinWackelbild transfer (the transferred images contain no
+  EXIF/GPS metadata).
 
 User-generated content
 - Purpose: Titles, descriptions and favorites created by the user
-- Collected: Yes
-- Shared: No
-- Required: No
 
 Files and documents
 - Purpose: Manual ZIP backup export selected by the user
-- Collected: Yes
-- Shared: No
-- Required: No
 
 ==================================================
 DATA NOT COLLECTED
@@ -76,17 +100,38 @@ DATA NOT COLLECTED
 DATA SHARING
 ==================================================
 
-SameView does not transmit user data to developer servers or third parties.
+SameView does not transmit user data to developer servers.
 
-User data only leaves the device when the user explicitly initiates an export or uses the Android Share Sheet.
+User data only leaves the device when the user explicitly initiates one of:
+- an export or the Android Share Sheet
+- the optional DeinWackelbild order
+
+Photos - Shared: No
+
+Basis: Google Play guidance does not require a transfer to a third party to be
+disclosed as "sharing" when it is "based on a specific user-initiated action,
+where the user reasonably expects the data to be shared". The DeinWackelbild
+transfer starts only after an explicit user action, and immediately before the
+transfer the app discloses that the two images go to DeinWackelbild.de and that
+ordering is completed there.
+
+This document does not rely on the "service provider" exception.
+
+Open point: SameView receives a 10% commission on orders attributable to this
+handoff. The official guidance consulted does not address a commercial
+relationship in connection with this exception. This must be checked when the
+live Play Console form is completed (see OPEN ITEMS). No conclusion is drawn
+here.
 
 ==================================================
 DATA SECURITY
 ==================================================
 
-- No network communication
-- No INTERNET permission
-- All user data remains on the device
+- Normal use causes no network traffic
+- The only network transmission by the app is the optional DeinWackelbild order
+- That transmission uses HTTPS
+- No automatic upload and no background upload
+- In normal use, user data remains on the device
 - User sessions are excluded from Android Auto Backup and device transfer
 - No automatic cloud synchronization
 
@@ -102,10 +147,12 @@ Optional
 - ACCESS_COARSE_LOCATION
 - ACCESS_MEDIA_LOCATION
 
+Declared for the optional DeinWackelbild order
+- INTERNET
+
 Technical note
 - The final release manifest contains the transitive permission ACCESS_NETWORK_STATE from AndroidX Media3.
-  SameView does not use any network state APIs, does not declare the INTERNET permission,
-  and performs no network communication.
+  SameView-owned code does not use it, and it does not itself permit data transmission.
 - android.permission.DUMP is not requested by SameView. It appears only as the
   android:permission protection attribute of the AndroidX ProfileInstallReceiver and
   grants no capability to the app.
@@ -119,38 +166,127 @@ No third-party tracking or monetization SDKs are included.
 
 Libraries used consist primarily of AndroidX / Jetpack, CameraX, Media3, Coil, Hilt/Dagger, ExifInterface and DataStore.
 
+Used only for the optional DeinWackelbild order:
+- OkHttp (HTTPS transfer to DeinWackelbild)
+- AndroidX Browser (opens the external checkout in a Chrome Custom Tab)
+
 Not included:
 - Firebase
 - Google Analytics
 - Crashlytics
 - Advertising SDKs
-- Networking libraries
+
+==================================================
+OPTIONAL DEINWACKELBILD ORDER
+==================================================
+
+What it is
+- A separate optional feature to order a physical lenticular print (Wackelbild).
+- Nothing is transferred through normal use of SameView.
+
+When data is transferred
+- Only after an explicit user action.
+- Immediately before the transfer, the app discloses that the two images go to
+  DeinWackelbild.de and that ordering is completed there.
+- No automatic upload, no background upload.
+
+What is transferred
+- Exactly two prepared JPEGs: reference + capture.
+- They are derived/prepared copies, not the stored originals.
+- They contain no EXIF/GPS metadata.
+- If the date option is enabled, the date text is rendered into the image pixels.
+- Technical handoff values, including a partner identifier, format, orientation
+  and direction.
+- No SameView session ID and no external reference is sent.
+- No analytics, telemetry or tracking data.
+
+How
+- HTTPS.
+- The checkout/configurator then opens externally in a Chrome Custom Tab /
+  browser. Data the user enters there is entered on the DeinWackelbild website,
+  not in SameView.
+
+Recipient / operator / seller
+- O.Schulze / M.Monka GbR (DeinWackelbild), Wolfener Str. 32-34, 12681 Berlin, Germany
+- The physical print order is completed with DeinWackelbild under its own terms
+  and is separate from the SameView purchase on Google Play.
+- SameView receives a 10% commission on orders attributable to this handoff.
+
+Retention
+- If no order is completed, DeinWackelbild retains the transferred images for
+  24 hours and then deletes them.
+- Retention for completed orders is not documented here.
+- SameView does not receive the transferred images back.
+
+Never record the partner identifier value in this repository.
 
 ==================================================
 GOOGLE PLAY DECLARATION SUMMARY
 ==================================================
 
+Does the app collect or share any of the required user data types
+- Yes
+
 Collected
-- Photos
+- Photos (optional, purpose: App functionality, not processed ephemerally)
+
+Shared
+- None (user-initiated transfer; see DATA SHARING)
+
+Not declared (processed on device only)
+- Photos (stored originals)
 - Videos
 - Location
 - User-generated content
 - Files and documents (manual backup export)
 
-Shared
-- None
-
 Encryption in transit
-- Not applicable (no network transmission)
+- Yes (HTTPS)
 
 Data deletion
 - Users can delete individual sessions inside the app.
 - Uninstalling the app removes all locally stored app data.
+- SameView holds no server-side copy of the transferred images.
+- The 24-hour deletion by DeinWackelbild applies to transfers without a completed
+  order only. It is not used here as the basis for a deletion answer in the form.
+
+==================================================
+OPEN ITEMS - VERIFY IN THE LIVE PLAY CONSOLE
+==================================================
+
+This file is a reference. The live Play Console form is not changed by it.
+
+- Record the current live Data safety answers before changing them.
+- Set "collects or shares required user data types" to Yes and add Photos as above.
+- Photos sharing: confirm "Shared: No" against the live form wording, including
+  the open point on the 10% commission.
+- Set encryption in transit to Yes.
+- Answer the deletion request question deliberately; retention for completed
+  orders is not established.
+- Confirm that data entered in the external checkout (Chrome Custom Tab) does not
+  need to be declared. The guidance consulted addresses webviews, not Custom Tabs.
+- Confirm the privacy policy URL points at the live page that describes the order.
+- Review Play Console warnings for the build that declares INTERNET.
+- Update the form no later than the first rollout of that build on any track.
+
+Not decided in this document (outside Data safety)
+- SameView's role under GDPR for the transfer.
+- The legal basis for the transfer.
+- What order or attribution information SameView receives in connection with
+  the commission.
 
 ==================================================
 NOTES
 ==================================================
 
-This document is based on the technical Google Play Data Safety audit performed against the SameView source code (July 2026).
+This document is based on the technical Google Play Data Safety audit performed against the SameView source code (July 2026) and its addendum on the optional DeinWackelbild order (October 2026).
+
+Google sources consulted on 2026-10-02:
+- Play Console Help: Provide information for Google Play's Data safety section
+  https://support.google.com/googleplay/android-developer/answer/10787469
+- Play Console Help: User Data policy
+  https://support.google.com/googleplay/android-developer/answer/10144311
+
+Re-read the current wording in the live form before each submission.
 
 It serves as the reference document for completing the Google Play Console Data Safety questionnaire.
