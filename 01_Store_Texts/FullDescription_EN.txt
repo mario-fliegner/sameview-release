@@ -13,7 +13,7 @@ Features
 • Keep your reference photos and comparisons organized
 • Optional GPS guidance back to the original photo location
 • Save a title, description, and location for each comparison
-• Export and import backups of your comparisons
+• Export backups of your comparisons
 
 
 No sign-up. No cloud.

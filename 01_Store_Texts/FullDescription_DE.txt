@@ -13,7 +13,7 @@ Funktionen
 • Referenzfotos und Vergleiche übersichtlich verwalten
 • Optionale GPS-Führung zurück zum ursprünglichen Aufnahmeort
 • Titel, Beschreibung und Standort zu jedem Vergleich speichern
-• Backups deiner Vergleiche exportieren und wieder importieren
+• Backups deiner Vergleiche exportieren
 
 
 Keine Registrierung. Keine Cloud.
