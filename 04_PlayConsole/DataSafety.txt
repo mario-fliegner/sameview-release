@@ -43,14 +43,28 @@ DATA COLLECTION
 ==================================================
 
 Photos
-- Purpose: App functionality (optional DeinWackelbild print order)
+- Purpose: App functionality (optional DeinWackelbild print order). No other
+  purpose applies.
 - Collected: Yes
 - Shared: No (see DATA SHARING)
 - Required: No (optional feature, starts only after an explicit user action)
-- Processed ephemerally: No
+- Processed ephemerally: No. DeinWackelbild stores the images for up to
+  24 hours (handoff not completed) or 30 days (completed order); they are not
+  held only in memory (see OPTIONAL DEINWACKELBILD ORDER / Retention).
 - Notes: Two prepared JPEG copies (reference + capture) are transmitted to
   DeinWackelbild when the user explicitly starts the order. The stored
   originals are not transmitted.
+
+Other transmitted values (not a Data safety data type)
+- Partner identifier (body field "partner" and partner key header): a constant
+  of the app, not user data.
+- Idempotency key: a random UUID per handoff attempt; not persisted, not a
+  device or user identifier.
+- Format, orientation, direction: product configuration values.
+- Locale: the request field exists but is not sent (never set by the app).
+- IP address: inherent to any network request. Google asks for IP addresses to
+  be disclosed based on actual use (for example to determine location). It is
+  not used that way (see Retention / use below), so it is not declared.
 
 ==================================================
 DATA PROCESSED ON DEVICE ONLY (NOT DECLARED)
@@ -117,11 +131,17 @@ ordering is completed there.
 
 This document does not rely on the "service provider" exception.
 
-Open point: SameView receives a 10% commission on orders attributable to this
-handoff. The official guidance consulted does not address a commercial
-relationship in connection with this exception. This must be checked when the
-live Play Console form is completed (see OPEN ITEMS). No conclusion is drawn
-here.
+Commission (decided 2026-10-07): SameView receives a 10% commission on orders
+attributable to this handoff. The user-initiated-action exception is not
+conditioned on the absence of a commercial relationship. The commission is paid
+for attributable orders, not for data, and DeinWackelbild has confirmed that
+image contents are not used for advertising, publication or profiling. The
+commission therefore does not change "Shared: No".
+
+Onward processing by DeinWackelbild (decided 2026-10-07): only the transfer from
+the app to DeinWackelbild is assessed for SameView. DeinWackelbild's hosting
+provider and Ecwid (which receives no image files) do not change SameView's
+classification.
 
 ==================================================
 DATA SECURITY
@@ -129,7 +149,12 @@ DATA SECURITY
 
 - Normal use causes no network traffic
 - The only network transmission by the app is the optional DeinWackelbild order
-- That transmission uses HTTPS
+- That transmission uses HTTPS only:
+  - the API base URL is fixed to https://deinwackelbild.de/wp-json/dwb/v1
+  - the server-returned upload URL and checkout URL are rejected unless HTTPS
+  - HTTP and HTTPS redirects are disabled in the HTTP client
+  - targetSdk 36 with no network security config: cleartext traffic is
+    blocked by the platform
 - No automatic upload and no background upload
 - In normal use, user data remains on the device
 - User sessions are excluded from Android Auto Backup and device transfer
@@ -212,11 +237,33 @@ Recipient / operator / seller
   and is separate from the SameView purchase on Google Play.
 - SameView receives a 10% commission on orders attributable to this handoff.
 
-Retention
-- If no order is completed, DeinWackelbild retains the transferred images for
-  24 hours and then deletes them.
-- Retention for completed orders is not documented here.
+Retention / use (confirmed in writing by DeinWackelbild, 2026-10; also stated in
+https://deinwackelbild.de/datenschutz/)
+- Handoff not completed: valid for 24 hours; the temporary files are then
+  deleted automatically.
+- Completed order: image, preview and production files are stored for 30 days
+  from order confirmation, then automatically deleted from the active
+  production system; existing production access is revoked.
+- Legally required order, invoice and accounting data are stored separately
+  according to the applicable retention periods.
+- Image files may temporarily remain in technical backups until overwritten
+  through the regular backup rotation. Backups are used exclusively for
+  recovery. The rotation period is not known; accepted as a documented residual
+  uncertainty (no further inquiry planned).
+- Use: exclusively to create the preview, produce the ordered Wackelbild,
+  process the order and handle directly related questions or complaints. Not
+  used for advertising, publication, profiling or training AI models.
+- In the normal SameView flow, image files are not transmitted to OpenAI,
+  analytics or advertising services.
+- DeinWackelbild's hosting provider processes the files as part of
+  website/server operation.
+- Ecwid receives the necessary product, partner and order information plus a
+  protected production-access URL; the image files are not uploaded to Ecwid.
 - SameView does not receive the transferred images back.
+
+The public SameView privacy policy (section 7) states only the 24-hour and
+30-day retention, a short backup note and a link to DeinWackelbild's privacy
+policy. The further details above are kept here as internal documentation.
 
 Never record the partner identifier value in this repository.
 
@@ -244,11 +291,26 @@ Encryption in transit
 - Yes (HTTPS)
 
 Data deletion
-- Users can delete individual sessions inside the app.
-- Uninstalling the app removes all locally stored app data.
+- Answer: Yes (users can request that their data is deleted).
+- Basis: Google allows this answer if collected data is automatically deleted
+  within 90 days of collection. DeinWackelbild deletes the transferred images
+  automatically after 24 hours (handoff not completed) or 30 days (completed
+  order).
+- Separately stored legally required order/accounting data: retention for legal
+  compliance is permitted by Google; these records do not contain the images.
+- Technical backups: images may remain until overwritten by the regular
+  rotation, used exclusively for recovery. Considered acceptable as retention
+  for a legitimate reason; rotation period unknown (accepted residual
+  uncertainty).
+- On the device: users delete individual sessions inside the app; uninstalling
+  the app removes all private app data.
 - SameView holds no server-side copy of the transferred images.
-- The 24-hour deletion by DeinWackelbild applies to transfers without a completed
-  order only. It is not used here as the basis for a deletion answer in the form.
+- No account exists, so no account deletion URL applies.
+
+External checkout (decided 2026-10-07)
+- Data the user enters in the DeinWackelbild checkout (Chrome Custom Tab) is not
+  declared. Google's rule covers webviews whose code/behavior the app controls;
+  a Custom Tab is the user's browser, and SameView does not control its content.
 
 ==================================================
 OPEN ITEMS - VERIFY IN THE LIVE PLAY CONSOLE
@@ -257,15 +319,11 @@ OPEN ITEMS - VERIFY IN THE LIVE PLAY CONSOLE
 This file is a reference. The live Play Console form is not changed by it.
 
 - Record the current live Data safety answers before changing them.
-- Set "collects or shares required user data types" to Yes and add Photos as above.
-- Photos sharing: confirm "Shared: No" against the live form wording, including
-  the open point on the 10% commission.
-- Set encryption in transit to Yes.
-- Answer the deletion request question deliberately; retention for completed
-  orders is not established.
-- Confirm that data entered in the external checkout (Chrome Custom Tab) does not
-  need to be declared. The guidance consulted addresses webviews, not Custom Tabs.
-- Confirm the privacy policy URL points at the live page that describes the order.
+- Read the live help text of the deletion question. If it does not accept
+  automatic deletion within 90 days as a basis for "Yes", stop and re-assess
+  before submitting.
+- Confirm the privacy policy URL points at the live page that describes the
+  order, including the 24-hour / 30-day retention.
 - Review Play Console warnings for the build that declares INTERNET.
 - Update the form no later than the first rollout of that build on any track.
 
@@ -281,11 +339,17 @@ NOTES
 
 This document is based on the technical Google Play Data Safety audit performed against the SameView source code (July 2026) and its addendum on the optional DeinWackelbild order (October 2026).
 
-Google sources consulted on 2026-10-02:
+Google sources consulted on 2026-10-02 (10787469 re-read on 2026-10-07):
 - Play Console Help: Provide information for Google Play's Data safety section
   https://support.google.com/googleplay/android-developer/answer/10787469
 - Play Console Help: User Data policy
   https://support.google.com/googleplay/android-developer/answer/10144311
+
+DeinWackelbild sources:
+- Written confirmation from DeinWackelbild for the SameView partner integration
+  (2026-10): retention, use, backups, hosting provider, Ecwid.
+- DeinWackelbild privacy policy: https://deinwackelbild.de/datenschutz/
+  (read on 2026-10-07; consistent with the confirmation).
 
 Re-read the current wording in the live form before each submission.
 

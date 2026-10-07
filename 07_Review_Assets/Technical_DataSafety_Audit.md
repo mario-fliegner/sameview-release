@@ -7,7 +7,7 @@
 **Scope:** Full-repository static analysis — manifest, Gradle/version catalog, and Kotlin sources — performed to support the Google Play Data Safety declaration for the first public release.
 
 > **Status (2026-10-02): superseded in part**
-> The body of this document records the v1.0 state as audited on 2026-07-20 and is kept unchanged as a record. Its findings that `android.permission.INTERNET` is not declared, that no networking library is present, and that the app is "fully offline", as well as its Data Safety mapping and final recommendation, no longer describe the current app. See [Addendum 2026-10-02](#addendum-2026-10-02-optional-deinwackelbild-order-flow) at the end of this document.
+> The body of this document records the v1.0 state as audited on 2026-07-20 and is kept unchanged as a record. Its findings that `android.permission.INTERNET` is not declared, that no networking library is present, and that the app is "fully offline", as well as its Data Safety mapping and final recommendation, no longer describe the current app. See [Addendum 2026-10-02](#addendum-2026-10-02-optional-deinwackelbild-order-flow) at the end of this document. The open questions of that addendum are resolved in [Addendum 2026-10-07](#addendum-2026-10-07-resolution-of-open-questions).
 
 > **Purpose of this document**
 > This is the authoritative technical reference behind SameView's Google Play Data Safety declaration. It exists so that future submissions, app updates, and Play review questions can be answered by pointing to concrete, verified evidence in the codebase rather than re-deriving the analysis from scratch. It is not a copy of the Play Console questionnaire — it is the reasoning and evidence that justifies each answer chosen there.
@@ -444,3 +444,56 @@ The repository reference for these answers is `04_PlayConsole/DataSafety.txt`.
 - **Outside Data Safety, not decided here:** SameView's role under GDPR for the transfer, the legal basis for the transfer, and what order or attribution information SameView receives in connection with the commission.
 
 Google sources consulted on 2026-10-02: Play Console Help "Provide information for Google Play's Data safety section" (answer/10787469) and the Play "User Data" policy (answer/10144311).
+
+---
+
+## Addendum 2026-10-07: Resolution of open questions
+
+**Addendum date:** 2026-10-07
+**Author:** Claude Code
+**Scope:** Resolves the open questions of the [Addendum 2026-10-02](#addendum-2026-10-02-optional-deinwackelbild-order-flow), which is kept unchanged as a record. Basis: written confirmation from DeinWackelbild for the SameView partner integration (2026-10), DeinWackelbild's privacy policy (`https://deinwackelbild.de/datenschutz/`, read on 2026-10-07), a re-read of Play Console Help answer/10787469 on 2026-10-07, and an inspection of the DeinWackelbild client sources (`OkHttpDeinWackelbildApiClient.kt`, `DeinWackelbildDtos.kt`, `WackelbildHandoffOrchestrator.kt`) and of `app/build.gradle.kts`.
+
+### Confirmed by DeinWackelbild
+
+- Handoff not completed: valid for 24 hours; temporary files are then deleted automatically.
+- Completed order: image, preview and production files are stored for 30 days from order confirmation, then automatically deleted from the active production system; production access is revoked.
+- Legally required order, invoice and accounting data are stored separately according to the applicable retention periods.
+- Image files may temporarily remain in technical backups until overwritten by the regular rotation; backups are used exclusively for recovery. The rotation period is not known (accepted residual uncertainty).
+- Images are used exclusively for preview, production, order processing and directly related questions or complaints; not for advertising, publication, profiling or training AI models.
+- In the normal SameView flow, image files are not transmitted to OpenAI, analytics or advertising services.
+- DeinWackelbild's hosting provider processes the files as part of website/server operation. Ecwid receives product, partner and order information plus a protected production-access URL, but not the image files.
+
+### Additional source evidence
+
+| Item | Evidence | Data safety consequence |
+|---|---|---|
+| HTTPS only | Fixed base URL `https://deinwackelbild.de/wp-json/dwb/v1`; upload and checkout URLs rejected unless HTTPS (`isValidHttpsUrl`); `followRedirects(false)` and `followSslRedirects(false)`; `targetSdk = 36` without network security config, so cleartext is blocked | Encryption in transit: Yes |
+| Partner identifier | Constant `partner = "sameview"` and partner key header | Not user data |
+| Idempotency key | `UUID.randomUUID()` per handoff attempt, not persisted | Not a device or user ID |
+| Format, orientation, direction | Product configuration values | Not user data |
+| Locale | Field exists in `CreateHandoffRequest` but is never set, so it is not serialized | Not sent |
+| IP address | Inherent to the request; not used to determine location | Not declared |
+
+### Resolved questions
+
+| Open question (2026-10-02) | Decision | Reason |
+|---|---|---|
+| Commission and the sharing exception | Photos remain **Shared: No** | The user-initiated-action exception is not conditioned on the absence of a commercial relationship. The commission is paid for attributable orders, not for data; image contents are not used for advertising or profiling. The service provider exception is still not relied on. |
+| Deletion question | **Yes** | Google accepts automatic deletion within 90 days of collection. Deletion happens after 24 hours or 30 days. Separately stored legal records do not contain the images; backups serve recovery only. |
+| External checkout | **Not declared** | Google's rule covers webviews whose code or behavior the app controls. A Chrome Custom Tab is the user's browser; SameView does not control its content. |
+| Ephemeral processing | **No** | The images are stored for up to 24 hours or 30 days, not only in memory. |
+| Ecwid / hosting provider | **No change** | Only the transfer from the app to DeinWackelbild is SameView's; onward processing by DeinWackelbild is not sharing by SameView. Ecwid receives no image files. |
+| Live form | Still to be completed manually | This addendum changes nothing in the Play Console. |
+
+### Final mapping
+
+| Play Category | Collected | Shared | Ephemeral | Optional | Purpose |
+|---|---|---|---|---|---|
+| Photos and videos → Photos | Yes | No | No | Optional | App functionality |
+| All other categories | No | — | — | — | — |
+
+Encryption in transit: **Yes**. Data deletion: **Yes**. The repository reference for the form remains `04_PlayConsole/DataSafety.txt`.
+
+### Still outside this document
+
+SameView's role under GDPR for the transfer and the legal basis for the transfer are not decided here.
