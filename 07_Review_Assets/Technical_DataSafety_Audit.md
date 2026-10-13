@@ -497,3 +497,19 @@ Encryption in transit: **Yes**. Data deletion: **Yes**. The repository reference
 ### Still outside this document
 
 SameView's role under GDPR for the transfer and the legal basis for the transfer are not decided here.
+
+---
+
+## Addendum 2026-10-13: Live form submitted
+
+**Addendum date:** 2026-10-13
+**Author:** Claude Code
+**Scope:** Records the submission of the live form and one deviation from the [Addendum 2026-10-07](#addendum-2026-10-07-resolution-of-open-questions), which is kept unchanged as a record. Basis: confirmation by the app owner; no source inspection.
+
+- **Live form:** The updated Data safety form was submitted in the Play Console, approved and published through Managed Publishing. The updated privacy policies (DE/EN) are live on sameview.app.
+- **Deletion question (supersedes "Yes" in the Addendum 2026-10-07):** The answer selected in the live form is **"No, but user data is automatically deleted within 90 days"**. No way for users to request deletion of their data is provided or declared. The basis is unchanged: automatic deletion after 24 hours (handoff not completed) or 30 days (completed order, in the active production system).
+- **Residual uncertainty:** The backup rotation period at DeinWackelbild is still not known (accepted).
+- **Public Data safety section** (`https://play.google.com/store/apps/datasafety?id=com.isardomains.sameview`, checked manually): Photos collected, optional, for app functionality; no data shared with third parties; data encrypted in transit.
+- **Unchanged:** All other answers of the final mapping in the Addendum 2026-10-07.
+
+The repository reference for the form remains `04_PlayConsole/DataSafety.txt`.

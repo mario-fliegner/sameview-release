@@ -291,11 +291,12 @@ Encryption in transit
 - Yes (HTTPS)
 
 Data deletion
-- Answer: Yes (users can request that their data is deleted).
-- Basis: Google allows this answer if collected data is automatically deleted
-  within 90 days of collection. DeinWackelbild deletes the transferred images
-  automatically after 24 hours (handoff not completed) or 30 days (completed
-  order).
+- Answer selected in the live form (2026-10-13): "No, but user data is
+  automatically deleted within 90 days".
+- No way for users to request deletion of their data is provided or declared.
+- Basis: DeinWackelbild deletes the transferred images automatically after
+  24 hours (handoff not completed) or 30 days (completed order, in the active
+  production system).
 - Separately stored legally required order/accounting data: retention for legal
   compliance is permitted by Google; these records do not contain the images.
 - Technical backups: images may remain until overwritten by the regular
@@ -313,19 +314,23 @@ External checkout (decided 2026-10-07)
   a Custom Tab is the user's browser, and SameView does not control its content.
 
 ==================================================
-OPEN ITEMS - VERIFY IN THE LIVE PLAY CONSOLE
+SUBMISSION STATUS (2026-10-13)
 ==================================================
 
 This file is a reference. The live Play Console form is not changed by it.
 
-- Record the current live Data safety answers before changing them.
-- Read the live help text of the deletion question. If it does not accept
-  automatic deletion within 90 days as a basis for "Yes", stop and re-assess
-  before submitting.
-- Confirm the privacy policy URL points at the live page that describes the
-  order, including the 24-hour / 30-day retention.
+- The updated Data safety form was submitted in the Play Console, approved and
+  published through Managed Publishing.
+- The updated privacy policies (DE/EN) are live on sameview.app and describe
+  the order, including the 24-hour / 30-day retention.
+- The public Data safety section was checked manually:
+  https://play.google.com/store/apps/datasafety?id=com.isardomains.sameview
+  Shown there: Photos collected, optional, for app functionality; no data
+  shared with third parties; data encrypted in transit.
+- Deletion question: see GOOGLE PLAY DECLARATION SUMMARY / Data deletion.
+
+Still to do with the build upload
 - Review Play Console warnings for the build that declares INTERNET.
-- Update the form no later than the first rollout of that build on any track.
 
 Not decided in this document (outside Data safety)
 - SameView's role under GDPR for the transfer.
