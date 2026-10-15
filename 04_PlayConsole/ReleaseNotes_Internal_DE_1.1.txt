@@ -1,0 +1,84 @@
+# Release Notes
+
+## Release
+
+- Versionsname: 1.1
+- Versionscode: 101
+- Veröffentlichungsdatum: TBD
+
+---
+
+## Überblick
+
+Release 2 von SameView. SameView bleibt eine Offline-first-App zum Nachstellen und Vergleichen von Fotos: Aufnahme, Vergleich, Bearbeitung, Teilen, Video-Export und Sicherung laufen weiterhin vollständig auf dem Gerät, ohne Konto und ohne eigenes Backend.
+
+Neu ist eine einzige, optionale Online-Funktion: Aus einem Vergleich kann ein Wackelbild bei DeinWackelbild.de bestellt werden. Eine Übertragung findet nur statt, wenn die Nutzerin oder der Nutzer sie ausdrücklich auslöst.
+
+Alle Funktionen aus Version 1.0 bleiben unverändert erhalten (siehe ReleaseNotes_Internal_DE.txt).
+
+---
+
+## Neue Funktionen
+
+### Wackelbild erstellen (DeinWackelbild.de)
+
+- Neuer Eintrag "Wackelbild erstellen" im Export-Menü des Vergleichs.
+- Interaktive Wackelbild-Vorschau von Referenz- und neuem Foto: Überblendung durch Neigen des Geräts oder durch Wischen über das Bild, mit Lentikular-Optik. Für Screenreader gibt es eine eigene Aktion zum Umschalten zwischen den beiden Bildern; Neigen ist nicht erforderlich.
+- Optional kann das Datum ins Bild übernommen werden (standardmäßig aus; nur verfügbar, wenn der Vergleich ein Referenzdatum hat).
+- Das Druckformat wird automatisch passend zum Seitenverhältnis des Vergleichs gewählt (z. B. 10x15 für 9:16 oder 16:9, 15x20 für 3:4); die Vorschau zeigt genau den Bildausschnitt, der übertragen wird.
+- Vorschau, Neigen, Wischen und das Datum funktionieren vollständig offline. Beim Öffnen des Bildschirms findet keine Übertragung statt.
+- Erst mit "Bestelle dein Wackelbild" werden die beiden Bilder an DeinWackelbild.de übertragen; ein dauerhaft sichtbarer Hinweis auf dem Bildschirm nennt vorab Empfänger und Zweck. Danach öffnet sich DeinWackelbild.de im Browser (Custom Tab). Gestaltung, Bestellung und Bezahlung erfolgen ausschließlich dort.
+- Sind die Originaldateien eines Vergleichs nicht verfügbar, weist ein Dialog vor der Übertragung auf die geringere Qualität hin; ohne Bestätigung wird nichts übertragen.
+- Die Übertragung kann über Zurück mit Bestätigung abgebrochen werden. Fehlt die Internetverbindung, erscheint ein Hinweis mit "Erneut versuchen".
+- Nach der Rückkehr aus dem Browser steht die Vorschau wieder am Anfang; eine erneute Bestellung erzeugt eine neue Übertragung.
+
+### Land für Vergleiche
+
+- Im Bearbeitungsbildschirm kann ein Land aus einer durchsuchbaren Liste gewählt oder wieder entfernt werden.
+- Das Land wird in der jeweiligen App-Sprache im Vergleich, im geteilten Bild und im Video angezeigt.
+- Bestehende Vergleiche bleiben unverändert lesbar; das Feld ist optional.
+
+### Verbesserte Prüfung des Referenzdatums
+
+- Ein Referenzdatum, das nach dem Aufnahmedatum liegt, wird beim Bearbeiten abgelehnt. Die Prüfung berücksichtigt die angegebene Genauigkeit (Jahr, Jahr-Monat oder vollständiges Datum).
+- Bereits gespeicherte Werte werden nicht verändert.
+
+### Anpassungen für Android 16
+
+- Ziel- und Kompilier-API auf Android 16 (API 36) angehoben; Mindestversion unverändert Android 10 (API 29).
+- Zurück-Geste (Predictive Back), Systemleisten und Bedienungshilfe-Ansagen der Kamera-Hinweise auf Android 16 angepasst und geprüft.
+
+---
+
+## Datenschutz
+
+- SameView bleibt offline-first. Aufnahme, Vergleich, Bearbeitung, Teilen, Video-Export und Sicherung stellen keine Netzwerkverbindung her.
+- Die INTERNET-Berechtigung wird ausschließlich für die optionale Wackelbild-Übertragung an DeinWackelbild.de verwendet. Es gibt keine automatische Übertragung, weder beim App-Start noch beim Öffnen von Vergleich oder Wackelbild-Bildschirm noch im Hintergrund.
+- Übertragen werden genau zwei vorbereitete JPEG-Kopien (Referenz- und neues Foto), ohne EXIF- und GPS-Daten; das Datum ist, falls aktiviert, nur als Bildinhalt enthalten. Dazu kommen die technisch erforderlichen Übergabefelder (Partnerkennung, Format, Ausrichtung, Richtung). Es wird keine Session- oder Vergleichs-ID übertragen. Die gespeicherten Originaldateien bleiben unverändert.
+- Die Übertragung erfolgt verschlüsselt über HTTPS.
+- Löschfristen bei DeinWackelbild (schriftlich bestätigt): nicht abgeschlossene Übergaben nach 24 Stunden; bei abgeschlossener Bestellung werden Bild-, Vorschau- und Produktionsdateien 30 Tage nach Bestellbestätigung aus dem aktiven Produktionssystem gelöscht. Gesetzlich erforderliche Bestell- und Rechnungsdaten werden nach den gesetzlichen Fristen aufbewahrt. Bilddateien können bis zum Überschreiben vorübergehend in technischen Sicherungen verbleiben.
+- DeinWackelbild verwendet die Bilder ausschließlich für Vorschau, Produktion und Abwicklung der Bestellung. SameView erhält die übertragenen Bilder nicht zurück.
+- SameView erhält für über diese Funktion vermittelte Bestellungen eine Provision von DeinWackelbild.
+- Weiterhin keine Analyse-, Tracking-, Absturzbericht-, Werbe- oder Cloud-Dienst-Integration.
+- Der Standortzugriff bleibt optional, standardmäßig deaktiviert und auf die Standort-Hilfe beschränkt; Standortdaten werden nicht an DeinWackelbild übertragen.
+- Vergleichsdaten bleiben von der automatischen Sicherung und der Gerätewechsel-Funktion von Android ausgeschlossen.
+
+---
+
+## Bekannte Einschränkungen
+
+### Neu in Version 1.1
+
+- Die Bestellung erfolgt ausschließlich bei DeinWackelbild.de. SameView zeigt keinen Bestellstatus und erhält keine Rückmeldung zur Bestellung.
+- SameView übermittelt keine Sprache an DeinWackelbild.de; der Shop erscheint in seiner eigenen Standardsprache, unabhängig von der App-Sprache.
+- Nach dem Abbrechen einer Übertragung bleibt der Wackelbild-Bildschirm geöffnet; es erfolgt keine automatische Rückkehr zum Vergleich.
+- Für die Übertragung ist eine aktive Internetverbindung erforderlich. Die Übertragung läuft nicht im Hintergrund weiter; wird die App währenddessen beendet, wird sie nicht fortgesetzt.
+- Bei sehr langsamer Upload-Verbindung kann die Übertragung abbrechen und als fehlende Internetverbindung gemeldet werden.
+
+### Unverändert aus Version 1.0
+
+- Der Sicherungs-Export ist einseitig: Es gibt keine In-App-Funktion, um eine zuvor exportierte ZIP-Datei zu importieren oder wiederherzustellen.
+- Das Löschen eines Vergleichs entfernt die internen Vergleichsdaten, löscht aber nicht das zugehörige Foto (oder dessen Standortdaten) aus der Gerätegalerie; dieses Foto muss bei Bedarf separat entfernt werden.
+- Bei einer kleinen Zahl von Referenzbildformaten, die auf dem Gerät nicht neu kodiert werden können (bestimmte ältere AVIF-Dateien oder Dateien mit nicht erkanntem Format), kann die Funktion "Metadaten aus Originalen entfernen" vorhandene Metadaten aus dem gespeicherten Original nicht entfernen; die App weist in diesem Fall pro Vergleich darauf hin.
+- Der Vergleichs-Schieberegler und die Positionierung der Überlagerung basieren auf Touch-Gesten (Ziehen und Zwei-Finger-Zoom) ohne alternative Eingabemöglichkeit für Screenreader-Nutzerinnen und -Nutzer.
+- Sehr große Referenzbilder können bei der Erstellung eines Vergleichs auf Geräten mit wenig Arbeitsspeicher zu erhöhtem Speicherbedarf führen.

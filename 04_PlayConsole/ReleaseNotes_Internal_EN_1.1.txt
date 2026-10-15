@@ -1,0 +1,84 @@
+# Release Notes
+
+## Release
+
+- Version Name: 1.1
+- Version Code: 101
+- Release Date: TBD
+
+---
+
+## Overview
+
+Release 2 of SameView. SameView remains an offline-first photo re-shoot and comparison app: capture, comparison, editing, sharing, video export and backup still run entirely on the device, with no account and no SameView backend.
+
+New is a single, optional online feature: a lenticular print of a comparison can be ordered from DeinWackelbild.de. A transfer happens only when the user explicitly starts it.
+
+All features from version 1.0 remain unchanged (see ReleaseNotes_Internal_EN.txt).
+
+---
+
+## New Features
+
+### Create Lenticular Print (DeinWackelbild.de)
+
+- New "Create lenticular print" entry in the comparison's Export menu.
+- Interactive lenticular preview of the reference and the new photo: blend between them by tilting the device or swiping over the image, with a lenticular look. Screen-reader users get a dedicated action to switch between the two images; tilting is not required.
+- The date can optionally be added to the images (off by default; only available when the comparison has a reference date).
+- The print format is chosen automatically to match the comparison's aspect ratio (for example 10x15 for 9:16 or 16:9, 15x20 for 3:4); the preview shows exactly the crop that will be sent.
+- Preview, tilting, swiping and the date option work fully offline. Opening the screen sends nothing.
+- Only "Order your lenticular print" sends the two images to DeinWackelbild.de; a permanently visible notice on the screen names the recipient and purpose beforehand. DeinWackelbild.de then opens in the browser (Custom Tab). Designing, ordering and paying happen there only.
+- If a comparison's original files are not available, a dialog warns about the lower quality before anything is sent; nothing is sent without confirmation.
+- The transfer can be cancelled with Back after a confirmation. Without an internet connection, a notice with "Try again" is shown.
+- After returning from the browser the preview starts over; ordering again creates a new transfer.
+
+### Country for Comparisons
+
+- The session editor lets the user pick a country from a searchable list, or remove it again.
+- The country is shown in the current app language in the comparison, in shared images and in videos.
+- Existing comparisons stay readable unchanged; the field is optional.
+
+### Improved Reference Date Validation
+
+- A reference date later than the capture date is rejected when editing. The check respects the precision entered (year, year-month or full date).
+- Values that are already stored are not changed.
+
+### Updates for Android 16
+
+- Target and compile API raised to Android 16 (API 36); the minimum stays Android 10 (API 29).
+- Predictive back, system bars and the accessibility announcements of the camera hints were adapted and checked on Android 16.
+
+---
+
+## Privacy
+
+- SameView remains offline-first. Capture, comparison, editing, sharing, video export and backup make no network connections.
+- The INTERNET permission is used only for the optional lenticular print transfer to DeinWackelbild.de. There is no automatic transfer: not on app start, not when opening a comparison or the lenticular screen, and not in the background.
+- Exactly two prepared JPEG copies (reference and new photo) are sent, without EXIF or GPS data; if enabled, the date is only part of the image content. They come with the technically required handoff fields (partner identifier, format, orientation, direction). No session or comparison ID is sent. The stored original files are not changed.
+- The transfer is encrypted over HTTPS.
+- Retention at DeinWackelbild (confirmed in writing): handoffs that are not completed are deleted after 24 hours; for a completed order, image, preview and production files are deleted from the active production system 30 days after the order confirmation. Legally required order and invoice data are kept for the statutory periods. Image files may remain temporarily in technical backups until they are overwritten.
+- DeinWackelbild uses the images only for the preview, production and handling of the order. SameView does not receive the transferred images back.
+- SameView receives a commission from DeinWackelbild for orders placed through this feature.
+- Still no analytics, tracking, crash reporting, advertising or cloud service integration.
+- Location access remains optional, off by default and limited to Recreation Guidance; location data is not sent to DeinWackelbild.
+- Session data remains excluded from Android's automatic backup and device transfer.
+
+---
+
+## Known Limitations
+
+### New in Version 1.1
+
+- Ordering happens only on DeinWackelbild.de. SameView shows no order status and receives no feedback about the order.
+- SameView does not send a language to DeinWackelbild.de; the shop appears in its own default language, regardless of the app language.
+- After cancelling a transfer, the lenticular screen stays open; there is no automatic return to the comparison.
+- The transfer needs an active internet connection. It does not continue in the background; if the app is closed during the transfer, it is not resumed.
+- On a very slow upload connection, the transfer can stop and be reported as a missing internet connection.
+
+### Unchanged from Version 1.0
+
+- Backup export is one-way: there is no in-app function to import or restore a previously exported ZIP file.
+- Deleting a session removes the internal comparison data but does not delete the corresponding photo (or its location data) from the device gallery; that photo must be removed separately if desired.
+- For a small number of reference image formats that cannot be re-encoded on the device (certain older AVIF files, or files with an unrecognized format), the "strip metadata from originals" feature cannot remove existing metadata from the stored original; the app discloses this per session when it occurs.
+- The comparison slider and overlay positioning rely on touch gestures (drag and pinch) without an alternative input path for screen-reader users.
+- Very large reference images can increase memory use during session creation on lower-memory devices.

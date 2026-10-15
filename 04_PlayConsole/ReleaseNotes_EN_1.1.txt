@@ -1,0 +1,6 @@
+New in version 1.1:
+
+• Create lenticular print: Experience your before-and-after comparison as an interactive lenticular preview – tilt or swipe, optionally with a date, completely offline. Like the result? Send your images to DeinWackelbild.de and order a physical lenticular print.
+• Select a country for comparisons
+• Improved reference date validation
+• Updates for Android 16

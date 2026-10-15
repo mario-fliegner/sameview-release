@@ -14,10 +14,11 @@ Funktionen
 • Optionale GPS-Führung zurück zum ursprünglichen Aufnahmeort
 • Titel, Beschreibung und Standort zu jedem Vergleich speichern
 • Backups deiner Vergleiche exportieren
+• Optional: Vergleich als Wackelbild ansehen und bei DeinWackelbild.de bestellen
 
 
 Keine Registrierung. Keine Cloud.
 
-SameView speichert deine Fotos und Daten ausschließlich lokal auf deinem Gerät. Du entscheidest selbst, was du teilen möchtest und in welchem Umfang.
+SameView speichert deine Fotos und Daten lokal auf deinem Gerät. Wenn du die Bestellung eines Wackelbilds startest, werden zwei vorbereitete Bilder an DeinWackelbild.de übertragen. Du entscheidest selbst, was du teilen möchtest und in welchem Umfang.
 
 SameView – Eine Perspektive. Zwei Momente.

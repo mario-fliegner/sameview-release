@@ -14,11 +14,12 @@ Features
 • Optional GPS guidance back to the original photo location
 • Save a title, description, and location for each comparison
 • Export backups of your comparisons
+• Optional: preview a comparison as a lenticular print and order it from DeinWackelbild.de
 
 
 No sign-up. No cloud.
 
-SameView stores your photos and data exclusively on your device. You decide what you keep, what you share, and when.
+SameView stores your photos and data on your device. When you start ordering a lenticular print, two prepared images are sent to DeinWackelbild.de. You decide what you keep, what you share, and when.
 
 
 SameView – One view. Two moments.

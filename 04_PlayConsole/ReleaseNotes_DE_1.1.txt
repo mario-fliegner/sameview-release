@@ -1,0 +1,6 @@
+Neu in Version 1.1:
+
+• Wackelbild erstellen: Erlebe deinen Vorher-Nachher-Vergleich als interaktives Wackelbild – durch Neigen oder Wischen, auf Wunsch mit Datum und ganz ohne Internet. Gefällt dir das Ergebnis, kannst du deine Bilder an DeinWackelbild.de übertragen und dort ein echtes Wackelbild bestellen.
+• Land für Vergleiche auswählen
+• Verbesserte Prüfung des Referenzdatums
+• Anpassungen für Android 16
